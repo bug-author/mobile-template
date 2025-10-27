@@ -7,10 +7,22 @@ This guide will walk you through setting up the React Native mobile template for
 Before you begin, ensure you have the following installed:
 
 - Node.js 18 or higher
-- npm or yarn
+- [Bun](https://bun.sh) (recommended) or npm/yarn
 - Git
-- Expo CLI: `npm install -g expo-cli`
-- EAS CLI: `npm install -g eas-cli`
+- Expo CLI: `bun install -g expo-cli` or `npm install -g expo-cli`
+- EAS CLI: `bun install -g eas-cli` or `npm install -g eas-cli`
+
+### Installing Bun
+
+Install Bun on macOS/Linux:
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
+
+Install Bun on Windows:
+```powershell
+powershell -c "irm bun.sh/install.ps1 | iex"
+```
 
 For iOS development:
 - macOS
@@ -32,9 +44,17 @@ cd mobile-template
 
 ### 2. Install Dependencies
 
+Using Bun (recommended):
+```bash
+bun install
+```
+
+Or using npm:
 ```bash
 npm install
 ```
+
+This will also set up Git hooks using Husky for code quality checks.
 
 ### 3. Configure Environment Variables
 
@@ -146,6 +166,12 @@ Update `eas.json` with your project configuration.
 
 ### Development
 
+Using Bun:
+```bash
+bun run start:dev
+```
+
+Or using npm:
 ```bash
 npm run start:dev
 ```
@@ -158,14 +184,70 @@ Then press:
 ### Staging
 
 ```bash
-npm run start:staging
+bun run start:staging
 ```
 
 ### Production
 
 ```bash
-npm run start:prod
+bun run start:prod
 ```
+
+## Pre-Commit Hooks
+
+This template includes Git hooks that automatically run when you commit code:
+
+### What Gets Checked
+
+- **Linting**: ESLint checks your TypeScript/JavaScript files
+- **Formatting**: Prettier formats your code
+- **Commit Messages**: Commitlint validates commit message format
+
+### Making Your First Commit
+
+```bash
+# 1. Stage your changes
+git add .
+
+# 2. Commit with proper message format
+git commit -m "feat: add new feature"
+
+# Hooks will run automatically:
+# ✔ Running lint-staged...
+# ✔ Checking commit message...
+```
+
+### Commit Message Format
+
+Use [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+type: description
+
+Examples:
+feat: add user profile screen
+fix: resolve login crash
+docs: update setup guide
+refactor: improve auth logic
+test: add user service tests
+```
+
+### Troubleshooting Hooks
+
+If hooks fail:
+
+```bash
+# Fix linting errors
+bun run lint:fix
+
+# Format code
+bun run format
+
+# Then try committing again
+git commit -m "feat: your message"
+```
+
+For more details, see [PRE_COMMIT_HOOKS.md](./PRE_COMMIT_HOOKS.md).
 
 ## Building the App
 

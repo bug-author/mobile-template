@@ -28,20 +28,37 @@ This project uses ESLint and Prettier for code formatting.
 
 Run linting:
 ```bash
-npm run lint
+bun run lint
+```
+
+Auto-fix linting errors:
+```bash
+bun run lint:fix
 ```
 
 Format code:
 ```bash
-npm run format
+bun run format
 ```
+
+**Note**: Pre-commit hooks will automatically run these checks before each commit.
 
 ### 4. Testing
 
 Always write tests for new features:
 
 ```bash
-npm test
+bun test
+```
+
+Watch mode:
+```bash
+bun test:watch
+```
+
+With coverage:
+```bash
+bun test:coverage
 ```
 
 Ensure all tests pass before submitting a PR.
@@ -64,7 +81,7 @@ const getUser = async (id: string): Promise<User> => {
 
 Run type checking:
 ```bash
-npm run type-check
+bun run type-check
 ```
 
 ## Code Guidelines
@@ -148,13 +165,15 @@ export const useAppStore = create<AppState>((set) => ({
 
 ### PR Checklist
 
-- [ ] Tests added and passing
-- [ ] Type checking passes
-- [ ] Linting passes
+- [ ] Tests added and passing (`bun test`)
+- [ ] Type checking passes (`bun run type-check`)
+- [ ] Linting passes (`bun run lint`)
+- [ ] Code formatted (`bun run format`)
 - [ ] Documentation updated
-- [ ] No console.log statements
+- [ ] No console.log statements (except in error handlers)
 - [ ] No commented code
-- [ ] Descriptive commit messages
+- [ ] Commit messages follow conventional commits
+- [ ] Pre-commit hooks pass
 
 ## Adding New Dependencies
 
@@ -165,6 +184,12 @@ When adding new dependencies:
 3. Document why the dependency is needed
 4. Update package.json
 
+Using Bun:
+```bash
+bun add <package-name>
+```
+
+Or using npm:
 ```bash
 npm install <package-name>
 ```

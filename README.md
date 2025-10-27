@@ -4,31 +4,59 @@ A production-ready React Native template built with Expo, featuring modern devel
 
 ## Features
 
+### Core Technologies
 - **Expo SDK 54** with the new architecture enabled
 - **Expo Router** for file-based routing
 - **NativeWind v4** for Tailwind CSS styling
 - **TypeScript** for type safety
+- **Bun** as the package manager
+
+### State Management & Data
 - **TanStack Query** for data fetching and caching
 - **Axios** for HTTP requests
 - **React Hook Form** with Zod validation
 - **Zustand** for state management
+
+### Third-Party Services
 - **PostHog** for analytics
 - **RevenueCat** for in-app purchases
 - **OneSignal** for push notifications
+
+### Development Tools
 - **React Native Testing Library** for testing
+- **ESLint** and **Prettier** for code quality
+- **Husky** and **Lint-staged** for pre-commit hooks
+- **Commitlint** for conventional commits
 - **App Flavors** (dev, staging, production)
 
 ## Prerequisites
 
 - Node.js 18+
-- npm or yarn
+- [Bun](https://bun.sh) (recommended) or npm/yarn
 - Expo CLI
 - iOS Simulator or Android Emulator
+
+### Installing Bun
+
+```bash
+curl -fsSL https://bun.sh/install | bash
+```
+
+Or on Windows:
+```powershell
+powershell -c "irm bun.sh/install.ps1 | iex"
+```
 
 ## Getting Started
 
 ### 1. Install Dependencies
 
+Using Bun (recommended):
+```bash
+bun install
+```
+
+Or using npm:
 ```bash
 npm install
 ```
@@ -69,6 +97,37 @@ npm run start:staging
 Production:
 ```bash
 npm run start:prod
+```
+
+## Pre-Commit Hooks
+
+This project uses Husky to run pre-commit hooks that ensure code quality:
+
+### What runs on commit:
+- **Lint-staged**: Runs ESLint and Prettier on staged files
+- **Commitlint**: Validates commit messages follow conventional commits
+
+### Commit Message Format
+
+Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+
+```
+type(scope): subject
+
+Examples:
+feat: add user authentication
+fix: resolve login button crash
+docs: update README
+refactor: improve auth service
+test: add tests for user service
+chore: update dependencies
+```
+
+### Bypassing Hooks (Not Recommended)
+
+Only in emergency situations:
+```bash
+git commit --no-verify -m "emergency fix"
 ```
 
 ## Project Structure

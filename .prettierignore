@@ -1,0 +1,12 @@
+node_modules
+.expo
+dist
+web-build
+ios
+android
+coverage
+.next
+*.log
+.DS_Store
+package-lock.json
+bun.lockb
