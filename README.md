@@ -5,6 +5,7 @@ A production-ready React Native template built with Expo, featuring modern devel
 ## Features
 
 ### Core Technologies
+
 - **Expo SDK 54** with the new architecture enabled
 - **Expo Router** for file-based routing
 - **NativeWind v4** for Tailwind CSS styling
@@ -12,31 +13,42 @@ A production-ready React Native template built with Expo, featuring modern devel
 - **Bun** as the package manager
 
 ### State Management & Data
+
 - **TanStack Query** for data fetching and caching
 - **Axios** for HTTP requests
 - **React Hook Form** with Zod validation
 - **Zustand** for state management
 
 ### Third-Party Services
+
 - **PostHog** for analytics and feature flags
 - **RevenueCat** for in-app purchases and subscriptions
 - **OneSignal** for push notifications
 - **Sentry** for error tracking and performance monitoring (recommended, free tier included)
 
 ### User Experience
+
 - **Dark Mode** with system preference detection
 - **i18n** for internationalization (English, Spanish)
 - **Toast Notifications** for user feedback
 - **Offline Banner** for network status
 - **Error Boundaries** with fallback UI
+- **Onboarding Flow** with multi-step introduction
+- **OTA Updates** with automatic update checks
+- **Screenshot Protection** for sensitive screens
+- **FlashList** for high-performance lists
+- **Image Picker & Share** with camera and gallery access
+- **Enhanced UI Components** (skeleton loaders, pull-to-refresh)
 
 ### Security
+
 - **Expo Secure Store** for sensitive data storage
 - **Biometric Authentication** (Face ID / Touch ID)
 - **Deep Linking** with universal links
 - **Secure token storage**
 
 ### Development Tools
+
 - **React Native Testing Library** for unit/component tests
 - **Maestro** for E2E testing
 - **GitHub Actions** for CI/CD
@@ -59,6 +71,7 @@ curl -fsSL https://bun.sh/install | bash
 ```
 
 Or on Windows:
+
 ```powershell
 powershell -c "irm bun.sh/install.ps1 | iex"
 ```
@@ -68,11 +81,13 @@ powershell -c "irm bun.sh/install.ps1 | iex"
 ### 1. Install Dependencies
 
 Using Bun (recommended):
+
 ```bash
 bun install
 ```
 
 Or using npm:
+
 ```bash
 npm install
 ```
@@ -86,6 +101,7 @@ Copy the environment files and update them with your API keys:
 - `.env.production`
 
 Update the following values:
+
 - `API_URL` - Your API base URL
 - `POSTHOG_API_KEY` - PostHog API key
 - `REVENUECAT_API_KEY` - RevenueCat API key
@@ -97,6 +113,7 @@ Update the following values:
 ### 3. Update App Configuration
 
 Edit `app.config.ts` and update:
+
 - Bundle identifiers (iOS and Android)
 - App name
 - EAS project ID
@@ -104,16 +121,19 @@ Edit `app.config.ts` and update:
 ### 4. Run the App
 
 Development:
+
 ```bash
 npm run start:dev
 ```
 
 Staging:
+
 ```bash
 npm run start:staging
 ```
 
 Production:
+
 ```bash
 npm run start:prod
 ```
@@ -123,6 +143,7 @@ npm run start:prod
 This project uses Husky to run pre-commit hooks that ensure code quality:
 
 ### What runs on commit:
+
 - **Lint-staged**: Runs ESLint and Prettier on staged files
 - **Commitlint**: Validates commit messages follow conventional commits
 
@@ -145,6 +166,7 @@ chore: update dependencies
 ### Bypassing Hooks (Not Recommended)
 
 Only in emergency situations:
+
 ```bash
 git commit --no-verify -m "emergency fix"
 ```
@@ -197,8 +219,9 @@ See [FEATURES.md](./FEATURES.md#network-detection) for usage.
 - Custom URL schemes per flavor
 - Universal links (iOS & Android)
 - Automatic routing with Expo Router
+- QR code scanning example for user profiles
 
-See [FEATURES.md](./FEATURES.md#deep-linking) for configuration.
+See [FEATURES.md](./FEATURES.md#deep-linking) for configuration and examples.
 
 ### Toast Notifications
 
@@ -207,6 +230,42 @@ See [FEATURES.md](./FEATURES.md#deep-linking) for configuration.
 - Auto-dismiss with configurable duration
 
 See [FEATURES.md](./FEATURES.md#notifications) for usage.
+
+### Onboarding Flow
+
+- Multi-step introduction screens
+- Skip functionality
+- Persistent completion state
+- Protected routes that redirect to onboarding for first-time users
+
+See [FEATURES.md](./FEATURES.md#onboarding-flow) for implementation.
+
+### OTA Updates
+
+- Automatic update checks on app launch
+- Background update downloads
+- User-friendly update prompts
+- Version display
+
+See [FEATURES.md](./FEATURES.md#ota-updates) for configuration.
+
+### Screenshot Protection
+
+- Prevent screenshots and screen recording
+- Optional per-screen protection
+- iOS and Android support
+
+See [FEATURES.md](./FEATURES.md#screenshot-protection) for usage.
+
+### Enhanced UI Components
+
+- **FlashList**: High-performance list component (replacement for FlatList)
+- **Skeleton Loaders**: Animated loading placeholders
+- **Pull-to-Refresh**: Easy-to-use refresh control wrapper
+- **Image Picker**: Camera and gallery access with permissions
+- **Share Functionality**: Native share dialogs for files and text
+
+See [FEATURES.md](./FEATURES.md#ui-components) for examples and usage.
 
 ### E2E Testing with Maestro
 
@@ -254,6 +313,7 @@ This template supports three app flavors:
 - **Production**: For release builds
 
 Each flavor has:
+
 - Different bundle identifier
 - Different app name
 - Different app icon
@@ -264,33 +324,39 @@ Each flavor has:
 ### Using EAS Build
 
 1. Install EAS CLI:
+
 ```bash
 npm install -g eas-cli
 ```
 
 2. Login to Expo:
+
 ```bash
 eas login
 ```
 
 3. Configure your project:
+
 ```bash
 eas build:configure
 ```
 
 4. Build for development:
+
 ```bash
 eas build --profile development --platform ios
 eas build --profile development --platform android
 ```
 
 5. Build for staging:
+
 ```bash
 eas build --profile staging --platform ios
 eas build --profile staging --platform android
 ```
 
 6. Build for production:
+
 ```bash
 eas build --profile production --platform ios
 eas build --profile production --platform android
@@ -299,11 +365,13 @@ eas build --profile production --platform android
 ## Testing
 
 Run tests:
+
 ```bash
 npm test
 ```
 
 Run tests with coverage:
+
 ```bash
 npm test -- --coverage
 ```
@@ -317,38 +385,48 @@ npm run type-check
 ## Libraries Included
 
 ### Core
+
 - **Expo**: Development framework
 - **React Native**: Mobile framework
 - **TypeScript**: Type safety
 
 ### Navigation
+
 - **Expo Router**: File-based routing
 
 ### Styling
+
 - **NativeWind**: Tailwind CSS for React Native
 - **Tailwind CSS**: Utility-first CSS
 
 ### State Management
+
 - **Zustand**: Lightweight state management
 - **TanStack Query**: Server state management
 
 ### Forms
+
 - **React Hook Form**: Form handling
 - **Zod**: Schema validation
 
 ### API
+
 - **Axios**: HTTP client
 
 ### Analytics & Monitoring
+
 - **PostHog**: Product analytics
 
 ### Monetization
+
 - **RevenueCat**: In-app purchases and subscriptions
 
 ### Push Notifications
+
 - **OneSignal**: Push notification service
 
 ### Testing
+
 - **Jest**: Testing framework
 - **React Native Testing Library**: Component testing
 
@@ -357,8 +435,9 @@ npm run type-check
 Environment variables are loaded from `.env.{variant}` files and made available through `expo-constants`.
 
 Access them in your code:
+
 ```typescript
-import { config } from './src/lib/config';
+import { config } from "./src/lib/config";
 
 console.log(config.apiUrl);
 console.log(config.isDevelopment);
@@ -369,6 +448,7 @@ console.log(config.isDevelopment);
 ### Adding New Screens
 
 Create a new file in `src/app/`:
+
 ```tsx
 // src/app/settings.tsx
 import { View, Text } from "react-native";
@@ -385,6 +465,7 @@ export default function SettingsScreen() {
 ### Adding New API Services
 
 Create a service file in `src/services/`:
+
 ```typescript
 // src/services/user.service.ts
 import { api } from "../lib/axios";
@@ -400,6 +481,7 @@ export const userService = {
 ### Adding New Stores
 
 Create a store file in `src/stores/`:
+
 ```typescript
 // src/stores/theme.store.ts
 import { create } from "zustand";

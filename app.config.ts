@@ -46,9 +46,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: getBundleId(),
-    associatedDomains: [
-      `applinks:${IS_DEV ? "dev." : IS_STAGING ? "staging." : ""}yourapp.com`,
-    ],
+    associatedDomains: [`applinks:${IS_DEV ? "dev." : IS_STAGING ? "staging." : ""}yourapp.com`],
     infoPlist: {
       NSFaceIDUsageDescription:
         "We use Face ID to securely authenticate you and protect your account.",
@@ -76,7 +74,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         category: ["BROWSABLE", "DEFAULT"],
       },
     ],
-    permissions: ["USE_BIOMETRIC", "USE_FINGERPRINT"],
+    permissions: [
+      "USE_BIOMETRIC",
+      "USE_FINGERPRINT",
+      "READ_EXTERNAL_STORAGE",
+      "WRITE_EXTERNAL_STORAGE",
+      "CAMERA",
+    ],
   },
   web: {
     favicon: "./assets/favicon.png",
@@ -85,6 +89,29 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     "expo-router",
     "expo-secure-store",
     "expo-local-authentication",
+    "expo-screen-capture",
+    [
+      "expo-media-library",
+      {
+        photosPermission: "Allow $(PRODUCT_NAME) to access your photos.",
+        savePhotosPermission: "Allow $(PRODUCT_NAME) to save photos.",
+        isAccessMediaLocationEnabled: true,
+      },
+    ],
+    [
+      "expo-image-picker",
+      {
+        photosPermission: "The app accesses your photos to let you share them.",
+        cameraPermission: "The app accesses your camera to let you take photos.",
+      },
+    ],
+    "expo-updates",
+    [
+      "react-native-gesture-handler",
+      {
+        enableCrashReporter: false,
+      },
+    ],
     [
       "onesignal-expo-plugin",
       {
