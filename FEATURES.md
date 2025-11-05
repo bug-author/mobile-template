@@ -47,46 +47,80 @@ import { ErrorBoundary } from "./src/components/ErrorBoundary";
 </ErrorBoundary>
 ```
 
-### Sentry Integration (Optional)
+### Sentry Integration (Recommended)
 
-Sentry provides detailed error tracking and performance monitoring.
+Sentry provides detailed error tracking and performance monitoring. The **free tier is included** and provides everything you need!
 
-**Setup**:
-1. Create account at [sentry.io](https://sentry.io)
-2. Add environment variables:
+**Free Tier Includes**:
+- 5,000 errors/month (plenty for development and production)
+- 10,000 performance transactions/month
+- 30 days data retention
+- Source maps support
+- Full stack traces
+- User identification
+
+**Quick Setup**:
+1. Create account at [sentry.io](https://sentry.io) (free)
+2. Create a React Native project
+3. Get your DSN (looks like: `https://abc@o123.ingest.sentry.io/456`)
+4. Add to environment variables:
    ```env
    SENTRY_DSN=your-sentry-dsn
    SENTRY_PROJECT=your-project
    SENTRY_ORG=your-org
    ```
-3. Sentry automatically initializes in `_layout.tsx`
+5. Sentry automatically initializes in `_layout.tsx`
+
+See [SENTRY_SETUP.md](./SENTRY_SETUP.md) for detailed setup guide.
+
+**What You Get**:
+- Automatic error capture
+- Performance monitoring
+- User identification (see which users are affected)
+- Breadcrumbs (see what led to the error)
+- Release tracking
 
 **Manual Error Logging**:
 ```tsx
 import { logErrorToSentry } from "./src/lib/sentry";
 
 try {
-  // risky operation
+  await processPayment();
 } catch (error) {
-  logErrorToSentry(error, { context: "payment-flow" });
+  logErrorToSentry(error, {
+    context: "payment-flow",
+    amount: 99.99
+  });
 }
+```
+
+**User Identification**:
+
+Automatically identifies users after login:
+```tsx
+// Called automatically in useAuth hook
+identifyUser(user.id, user.email, user.name);
 ```
 
 ### PostHog vs Sentry
 
-**Use PostHog for**:
+Both are free and complement each other perfectly!
+
+**PostHog is best for**:
 - Product analytics
 - Feature flags
 - Session recordings
-- Basic error tracking
+- Understanding user behavior
+- A/B testing
 
-**Use Sentry for**:
+**Sentry is best for**:
 - Detailed error stack traces
-- Error grouping
-- Release tracking
+- Error grouping and deduplication
 - Performance monitoring
+- Release tracking
+- Finding and fixing bugs
 
-**Recommendation**: Use both. PostHog for analytics, Sentry for errors.
+**Recommendation**: Use both! PostHog tells you what users do, Sentry tells you when things break.
 
 ## Dark Mode
 

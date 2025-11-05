@@ -21,7 +21,7 @@ A production-ready React Native template built with Expo, featuring modern devel
 - **PostHog** for analytics and feature flags
 - **RevenueCat** for in-app purchases and subscriptions
 - **OneSignal** for push notifications
-- **Sentry** (optional) for error tracking and performance monitoring
+- **Sentry** for error tracking and performance monitoring (recommended, free tier included)
 
 ### User Experience
 - **Dark Mode** with system preference detection
@@ -154,10 +154,11 @@ git commit --no-verify -m "emergency fix"
 ### Error Handling & Monitoring
 
 - **Error Boundaries**: Catch React errors with user-friendly fallback UI
-- **Sentry Integration (Optional)**: Detailed error tracking and performance monitoring
+- **Sentry Integration**: Detailed error tracking and performance monitoring with free tier
 - **PostHog Error Tracking**: Basic error logging via PostHog
+- **Automatic user identification**: See which users are affected by errors
 
-See [FEATURES.md](./FEATURES.md#error-handling) for details.
+See [FEATURES.md](./FEATURES.md#error-handling) and [SENTRY_SETUP.md](./SENTRY_SETUP.md) for setup.
 
 ### Dark Mode & Theming
 

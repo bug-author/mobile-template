@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useAuthStore } from "../stores/auth.store";
 import { authService } from "../services/auth.service";
+import { identifyUser, clearUser } from "../lib/sentry";
 
 export const useAuth = () => {
   const { user, token, isAuthenticated, setUser, setToken, logout } = useAuthStore();
@@ -10,6 +11,8 @@ export const useAuth = () => {
     onSuccess: (data) => {
       setUser(data.user);
       setToken(data.token);
+      // Identify user in Sentry
+      identifyUser(data.user.id, data.user.email, data.user.name);
     },
   });
 
@@ -18,6 +21,8 @@ export const useAuth = () => {
     onSuccess: (data) => {
       setUser(data.user);
       setToken(data.token);
+      // Identify user in Sentry
+      identifyUser(data.user.id, data.user.email, data.user.name);
     },
   });
 
@@ -25,6 +30,8 @@ export const useAuth = () => {
     mutationFn: authService.logout,
     onSuccess: () => {
       logout();
+      // Clear user from Sentry
+      clearUser();
     },
   });
 
