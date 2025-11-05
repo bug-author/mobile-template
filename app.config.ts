@@ -22,6 +22,12 @@ const getIconPath = () => {
   return "./assets/icon.png";
 };
 
+const getDeepLinkingScheme = () => {
+  if (IS_DEV) return "mobileappdev";
+  if (IS_STAGING) return "mobileappstaging";
+  return "mobileapp";
+};
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: getAppName(),
@@ -29,8 +35,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   version: "1.0.0",
   orientation: "portrait",
   icon: getIconPath(),
-  userInterfaceStyle: "light",
+  userInterfaceStyle: "automatic",
   newArchEnabled: true,
+  scheme: getDeepLinkingScheme(),
   splash: {
     image: "./assets/splash-icon.png",
     resizeMode: "contain",
@@ -39,6 +46,13 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: true,
     bundleIdentifier: getBundleId(),
+    associatedDomains: [
+      `applinks:${IS_DEV ? "dev." : IS_STAGING ? "staging." : ""}yourapp.com`,
+    ],
+    infoPlist: {
+      NSFaceIDUsageDescription:
+        "We use Face ID to securely authenticate you and protect your account.",
+    },
   },
   android: {
     adaptiveIcon: {
@@ -48,12 +62,29 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     package: getBundleId(),
     edgeToEdgeEnabled: true,
     predictiveBackGestureEnabled: false,
+    intentFilters: [
+      {
+        action: "VIEW",
+        autoVerify: true,
+        data: [
+          {
+            scheme: "https",
+            host: `${IS_DEV ? "dev." : IS_STAGING ? "staging." : ""}yourapp.com`,
+            pathPrefix: "/",
+          },
+        ],
+        category: ["BROWSABLE", "DEFAULT"],
+      },
+    ],
+    permissions: ["USE_BIOMETRIC", "USE_FINGERPRINT"],
   },
   web: {
     favicon: "./assets/favicon.png",
   },
   plugins: [
     "expo-router",
+    "expo-secure-store",
+    "expo-local-authentication",
     [
       "onesignal-expo-plugin",
       {
@@ -66,12 +97,21 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         apiKey: process.env.REVENUECAT_API_KEY,
       },
     ],
+    [
+      "@sentry/react-native/expo",
+      {
+        url: "https://sentry.io/",
+        project: process.env.SENTRY_PROJECT || "your-project",
+        organization: process.env.SENTRY_ORG || "your-org",
+      },
+    ],
   ],
   extra: {
     apiUrl: process.env.API_URL,
     posthogApiKey: process.env.POSTHOG_API_KEY,
     revenuecatApiKey: process.env.REVENUECAT_API_KEY,
     onesignalAppId: process.env.ONESIGNAL_APP_ID,
+    sentryDsn: process.env.SENTRY_DSN,
     appVariant: process.env.APP_VARIANT,
     eas: {
       projectId: "your-eas-project-id",

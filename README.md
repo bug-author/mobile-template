@@ -18,12 +18,28 @@ A production-ready React Native template built with Expo, featuring modern devel
 - **Zustand** for state management
 
 ### Third-Party Services
-- **PostHog** for analytics
-- **RevenueCat** for in-app purchases
+- **PostHog** for analytics and feature flags
+- **RevenueCat** for in-app purchases and subscriptions
 - **OneSignal** for push notifications
+- **Sentry** (optional) for error tracking and performance monitoring
+
+### User Experience
+- **Dark Mode** with system preference detection
+- **i18n** for internationalization (English, Spanish)
+- **Toast Notifications** for user feedback
+- **Offline Banner** for network status
+- **Error Boundaries** with fallback UI
+
+### Security
+- **Expo Secure Store** for sensitive data storage
+- **Biometric Authentication** (Face ID / Touch ID)
+- **Deep Linking** with universal links
+- **Secure token storage**
 
 ### Development Tools
-- **React Native Testing Library** for testing
+- **React Native Testing Library** for unit/component tests
+- **Maestro** for E2E testing
+- **GitHub Actions** for CI/CD
 - **ESLint** and **Prettier** for code quality
 - **Husky** and **Lint-staged** for pre-commit hooks
 - **Commitlint** for conventional commits
@@ -74,6 +90,9 @@ Update the following values:
 - `POSTHOG_API_KEY` - PostHog API key
 - `REVENUECAT_API_KEY` - RevenueCat API key
 - `ONESIGNAL_APP_ID` - OneSignal App ID
+- `SENTRY_DSN` - Sentry DSN (optional)
+- `SENTRY_PROJECT` - Sentry project name (optional)
+- `SENTRY_ORG` - Sentry organization (optional)
 
 ### 3. Update App Configuration
 
@@ -129,6 +148,79 @@ Only in emergency situations:
 ```bash
 git commit --no-verify -m "emergency fix"
 ```
+
+## Key Features
+
+### Error Handling & Monitoring
+
+- **Error Boundaries**: Catch React errors with user-friendly fallback UI
+- **Sentry Integration (Optional)**: Detailed error tracking and performance monitoring
+- **PostHog Error Tracking**: Basic error logging via PostHog
+
+See [FEATURES.md](./FEATURES.md#error-handling) for details.
+
+### Dark Mode & Theming
+
+- System preference detection
+- Manual theme switching (light/dark/system)
+- NativeWind dark mode classes
+
+See [FEATURES.md](./FEATURES.md#dark-mode) for implementation.
+
+### Internationalization
+
+- Multi-language support (English, Spanish)
+- Easy to add more languages
+- Language switcher component included
+
+See [FEATURES.md](./FEATURES.md#internationalization) for usage.
+
+### Security Features
+
+- **Secure Storage**: Keychain (iOS) and Keystore (Android) for sensitive data
+- **Biometric Auth**: Face ID / Touch ID support
+- **Secure Token Management**: Tokens stored in secure storage, not AsyncStorage
+
+See [FEATURES.md](./FEATURES.md#security-features) for implementation.
+
+### Network Detection
+
+- Real-time online/offline status
+- Offline banner component
+- Network type detection
+
+See [FEATURES.md](./FEATURES.md#network-detection) for usage.
+
+### Deep Linking
+
+- Custom URL schemes per flavor
+- Universal links (iOS & Android)
+- Automatic routing with Expo Router
+
+See [FEATURES.md](./FEATURES.md#deep-linking) for configuration.
+
+### Toast Notifications
+
+- Success, error, info, and warning toasts
+- Positioned at top of screen
+- Auto-dismiss with configurable duration
+
+See [FEATURES.md](./FEATURES.md#notifications) for usage.
+
+### E2E Testing with Maestro
+
+- Visual, interactive E2E test flows
+- Example tests included
+- CI/CD integration
+
+See [FEATURES.md](./FEATURES.md#testing) and [.maestro/README.md](./.maestro/README.md).
+
+### Comprehensive Documentation
+
+- [FEATURES.md](./FEATURES.md) - Detailed feature documentation
+- [SETUP_GUIDE.md](./SETUP_GUIDE.md) - Step-by-step setup instructions
+- [CONTRIBUTING.md](./CONTRIBUTING.md) - Contribution guidelines
+- [PRE_COMMIT_HOOKS.md](./PRE_COMMIT_HOOKS.md) - Git hooks guide
 
 ## Project Structure
 

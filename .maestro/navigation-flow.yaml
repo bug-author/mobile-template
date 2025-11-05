@@ -1,0 +1,11 @@
+appId: com.yourcompany.mobileapp.dev
+---
+- launchApp
+- assertVisible: "Mobile App Template"
+- tapOn: "Sign In"
+- assertVisible: "Email"
+- assertVisible: "Password"
+- tapOn: "Don't have an account?"
+- assertVisible: "Name"
+- tapOn: "Already have an account?"
+- assertVisible: "Sign In"
